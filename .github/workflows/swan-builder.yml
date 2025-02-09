@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Clone SwanStation repo and dependencies
       run: |
@@ -31,7 +31,7 @@ jobs:
         cmake --build . --config Release
 
     - name: Upload built core as artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: swanstation-core
         path: swanstation/build/Release/*.dll
