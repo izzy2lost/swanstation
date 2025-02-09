@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v2
 
     - name: Clone SwanStation repo and dependencies
       run: |
@@ -29,6 +29,10 @@ jobs:
         cd build
         cmake .. -G "Visual Studio 17 2022" -A x64
         cmake --build . --config Release
+
+    - name: List contents of build/Release
+      run: |
+        dir swanstation/build/Release
 
     - name: Upload built core as artifact
       uses: actions/upload-artifact@v4
