@@ -22,20 +22,15 @@ jobs:
         cd swanstation
         git submodule update --init --recursive
 
-    - name: Build SwanStation Core
+    - name: Build SwanStation Core with MT
       run: |
-        cd swanstation
-        mkdir build
-        cd build
-        cmake .. -G "Visual Studio 17 2022" -A x64
+        mkdir swanstation/build
+        cd swanstation/build
+        cmake .. -G "Visual Studio 17 2022" -A x64 -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded$<$<CONFIG:Debug>:Debug>
         cmake --build . --config Release
-
-    - name: List contents of build/Release
-      run: |
-        dir swanstation/build/Release
 
     - name: Upload built core as artifact
       uses: actions/upload-artifact@v4
       with:
         name: swanstation-core
-        path: swanstation/build/Release/*.dll
+        path: swanstation/**/*.dll
